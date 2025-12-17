@@ -61,9 +61,12 @@ st.markdown("""
 </style>
 """, unsafe_allow_html=True)
 
+import os
+
 # Load data
-training = pd.read_csv('Data/Training.csv')
-testing = pd.read_csv('Data/Testing.csv')
+script_dir = os.path.dirname(os.path.abspath(__file__))
+training = pd.read_csv(os.path.join(script_dir, 'Data', 'Training.csv'))
+testing = pd.read_csv(os.path.join(script_dir, 'Data', 'Testing.csv'))
 cols = training.columns
 cols = cols[:-1]
 x = training[cols]
@@ -118,7 +121,7 @@ def calc_condition(exp, days):
 
 def getDescription():
     global description_list
-    with open('MasterData/symptom_Description.csv') as csv_file:
+    with open(os.path.join(script_dir, 'MasterData', 'symptom_Description.csv')) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             _description = {row[0]: row[1]}
@@ -126,7 +129,7 @@ def getDescription():
 
 def getSeverityDict():
     global severityDictionary
-    with open('MasterData/symptom_severity.csv') as csv_file:
+    with open(os.path.join(script_dir, 'MasterData', 'symptom_severity.csv')) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         try:
             for row in csv_reader:
@@ -137,7 +140,7 @@ def getSeverityDict():
 
 def getprecautionDict():
     global precautionDictionary
-    with open('MasterData/symptom_precaution.csv') as csv_file:
+    with open(os.path.join(script_dir, 'MasterData', 'symptom_precaution.csv')) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             _prec = {row[0]: [row[1], row[2], row[3], row[4]]}
@@ -155,7 +158,7 @@ def check_pattern(dis_list, inp):
         return 0, []
 
 def sec_predict(symptoms_exp):
-    df = pd.read_csv('Data/Training.csv')
+    df = pd.read_csv(os.path.join(script_dir, 'Data', 'Training.csv'))
     X = df.iloc[:, :-1]
     y = df['prognosis']
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.3, random_state=20)
