@@ -129,7 +129,7 @@ def getDescription():
 
 def getSeverityDict():
     global severityDictionary
-    with open(os.path.join(script_dir, 'MasterData', 'symptom_severity.csv')) as csv_file:
+    with open(os.path.join(script_dir, 'MasterData', 'Symptom_severity.csv')) as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         try:
             for row in csv_reader:

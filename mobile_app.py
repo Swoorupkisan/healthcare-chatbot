@@ -39,13 +39,13 @@ precautionDictionary = {}
 symptoms_dict = {symptom: index for index, symptom in enumerate(x)}
 
 def getDescription():
-    with open('MasterData/symptom_Description.csv') as csv_file:
+    with open('MasterData/symptom_Description.csv') as csv_file:36w  
         csv_reader = csv.reader(csv_file, delimiter=',')
         for row in csv_reader:
             description_list[row[0]] = row[1]
 
 def getSeverityDict():
-    with open('MasterData/symptom_severity.csv') as csv_file:
+    with open('MasterData/Symptom_severity.csv') as csv_file:
         csv_reader = csv.reader(csv_file, delimiter=',')
         try:
             for row in csv_reader:
@@ -123,7 +123,6 @@ getprecautionDict()
 
 class ChatBotApp(App):
     def build(self):
-        print("Building app...")
         self.state = 'start'
         self.user_name = ''
         self.disease_input = ''
@@ -144,7 +143,6 @@ class ChatBotApp(App):
         self.layout.add_widget(self.scroll)
 
         self.update_ui()
-        print("App built successfully")
         return self.layout
 
     def update_ui(self):
